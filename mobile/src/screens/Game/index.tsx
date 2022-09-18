@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, TouchableOpacity, Image, FlatList, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { GameParams } from '../../@types/navigation';
@@ -50,7 +50,16 @@ export function Game() {
 				<FlatList
 					data={duos}
 					keyExtractor={item => item.id}
-					renderItem={({ item }) => <DuoCard data={item} />}
+					renderItem={({ item }) => <DuoCard data={item} onConnect={() => {}} />}
+					horizontal
+					style={styles.containerList}
+					contentContainerStyle={[
+						duos.length > 0 ? styles.contentList : styles.emptyListContent,
+					]}
+					showsHorizontalScrollIndicator={false}
+					ListEmptyComponent={() => (
+						<Text style={styles.emptyListText}>Não há anúncios públicados ainda.</Text>
+					)}
 				/>
 			</SafeAreaView>
 		</Background>
